@@ -34,14 +34,13 @@
     <nav class="top-navbar navbar fixed-top navbar-expand navbar-light bg-white">
         <div class="container">
             <a id='backbutton' style='text-decoration: none;' href='../index.html#projects'>Back to Projects</a>
-            <a id='backbutton' style='text-decoration: none;' href='https://drive.google.com/file/d/1PeT71mjwv4jzzV11-1EfxmA9vsbNSlWs/view?usp=sharing'>Download</a>
         </div>
     </nav>
     <main class="container">
         <article>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h1 class="font-weight-bold mt-4">TOC Curve Generator</h1>
+                    <h1 class="font-weight-bold mt-4">Disaggregating Census Data in Somalia Using Random Forests</h1>
                     <div class="col-7 ml-1">
                         <div class="row">
                             <h6>Zhen Liu</h6>
@@ -53,25 +52,72 @@
                             <small class="text-secondary"> zhenliu3@clarku.edu</small>
                         </div>
                     </div>
-                    <p class="text-secondary h4" style='padding-top:10px'>TOC Generator is a computer program to make TOC curves. Users can generate TOC curves from various file formats and customize TOC curves for research.
-                    </p>
-                    <img class="img-fluid my-4" src="assets/images/Features.jpg">
+                    <br>
+                    <figure class="figure">
+                        <img class="figure-img img-fluid col-12" src="assets/images/somaliaIDP.jpg">
+                        <figcaption class="figure-caption text-center"><small>Displaced population in Somalia (credit IOM)</small></figcaption>
+                    </figure>
+                    <p>In 2014, the Population Estimation Survey (PESS) became the first extensive household sample survey to be carried out among the Somalia population in decades. In the meantime, millions of people in Somalia are suffering from the resource shortage, natural disasters, and disease.</p>
+                    <p>For those countries like Somalia that do not have the reliable census data collection, the use of remotely sensed data is especially important for mapping population. This project is to generate the gridded population map in 2018 in Somalia by using Random Forest and an improved method. It will be critical in health, economic, and environmental fields across various temporal and spatial scales.</p>
+
                 </div>
             </div>
-
+            
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="font-weight-bold">How to Download and Run TOC Curve Generator</h2>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/datasource_pop.png">
+                            <figcaption class="figure-caption text-center"><small>general structure of the data processing and map production</small></figcaption>
+                        </figure>
                         <p>Click the right top button "Download" to download the program. Click "TOC_curve_generator.exe" to start the progam. The instruction slide is in the folder "instruction".</p>
                     </div>
                 </div>
             </section>
-            <section class="mt-5">
+            
+            <section class="mt-5" style='margin-top: 1rem!important'>
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="font-weight-bold">Papers describing the algorithms</h2>
-                        <p>Pontius, R. G., & Si, K. (2014) "The total operating characteristic to measure diagnostic ability for multiple thresholds".    International Journal of Geographical Information Science, 28(3), 570–583. </p>
+                        <h2 class="font-weight-bold">General Structure of the Project</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <figure class="figure">
+                        <img class="figure-img img-fluid col-12" src="assets/images/workflow_pop.png">
+                        <figcaption class="figure-caption text-center"><small>general structure of the data processing and map production</small></figcaption>
+                    </figure>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <p>This figure represents the general structure of the data processing and map production procedure. The orange boxes represent data pre-preparation stages. Items in blue represent Random Forest model estimation, per-pixel prediction and redistribution of census counts.
+                            In the initial method, the log population density of each level 2 administrative unit is used as a dependent variable. In the improved one, the training unit will be changed.
+                            </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h5 class="font-weight-bold mt-4">Data Preparation</h5>
+                        <ul>
+                            <li>In order to minimize edge effects associated with near-boarder populated areas, the census data are buffered 10 km.</li>
+                            <li>Also, we need to project all data into a conformal projection most appropriate for each country (e.g. UTM).</li>
+                            <li>The vector data is first projected and subset to match the buffered national borders, then is rasterized.</li>
+                            <li>Distance to the point data is generated as our covariates in the model.</li>
+                            <li>All raster covariates are resampled to match the rasterized census data and its buffer.</li>
+                            <li>We use a simple nearest neighbor filling approach to extend the edge of data sets and fill any gaps prior to model estimation.</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-8 mx-auto">
+                        <h5 class="font-weight-bold mt-4">Estimation by Random Forest</h5>
+                        <ul>
+                            <li>In the initial method, the training units are level 2 administrative units.</li>
+                            <li>In the improved method, we Integrate IDP sites in pixel and sum up the population. And, we use this pixels as pseudo administrative boundaries, the training unit will subtract the area and population of each pixel in the unit.</li>
+                            <li>Aggregate covariates by census blocks: we calculate zonal means for each continuous dataset.</li>
+                            <li>We log-transform the population density in order to create a more normal and even distribution of population density values with respect to other covariates.</li>
+                            <li>Due to the limited number of data, we use the out-of-bag score to assess the accuracy.</li>
+                            <li>The result of Random Forest is used to predict a country wide, pixel-level map of log population densities.</li>
+
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -79,7 +125,7 @@
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="font-weight-bold">Citation</h2>
+                        <h2 class="font-weight-bold">Result and Analysis</h2>
                         <p>If you make public a diagram that you worked out and/or checked with TOC Curve Generator, you may cite the software as follows:</p>
                         <p>Zhen Liu (2020) "TOC Curve Generator," software package, https://lazygis.github.io/projects/TOCCurveGenerator</p>
                     </div>
