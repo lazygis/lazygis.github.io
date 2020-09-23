@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TOC Curve Generator</title>
+    <title>Disaggregating Census Data in Somalia Using Random Forests</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -66,12 +66,11 @@
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="font-weight-bold">How to Download and Run TOC Curve Generator</h2>
+                        <h2 class="font-weight-bold">Remotely-Sensed and Ancillary Data</h2>
+                        <br>
                         <figure class="figure">
-                            <img class="figure-img img-fluid col-12" src="assets/images/datasource_pop.png">
-                            <figcaption class="figure-caption text-center"><small>general structure of the data processing and map production</small></figcaption>
+                            <img class="figure-img img-fluid col-12" src="assets/images/somaliaDataSource.png">
                         </figure>
-                        <p>Click the right top button "Download" to download the program. Click "TOC_curve_generator.exe" to start the progam. The instruction slide is in the folder "instruction".</p>
                     </div>
                 </div>
             </section>
@@ -112,6 +111,12 @@
                         <ul>
                             <li>In the initial method, the training units are level 2 administrative units.</li>
                             <li>In the improved method, we Integrate IDP sites in pixel and sum up the population. And, we use this pixels as pseudo administrative boundaries, the training unit will subtract the area and population of each pixel in the unit.</li>
+                        </ul>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/IntegrateIDP.png">
+                            <figcaption class="figure-caption text-center"><small>Integrate IDP sites in a ~100m pixel and sum up the population</small></figcaption>
+                        </figure>
+                        <ul>
                             <li>Aggregate covariates by census blocks: we calculate zonal means for each continuous dataset.</li>
                             <li>We log-transform the population density in order to create a more normal and even distribution of population density values with respect to other covariates.</li>
                             <li>Due to the limited number of data, we use the out-of-bag score to assess the accuracy.</li>
@@ -126,15 +131,41 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="font-weight-bold">Result and Analysis</h2>
-                        <p>If you make public a diagram that you worked out and/or checked with TOC Curve Generator, you may cite the software as follows:</p>
-                        <p>Zhen Liu (2020) "TOC Curve Generator," software package, https://lazygis.github.io/projects/TOCCurveGenerator</p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/SomaliaResultMap.png">
+                            <figcaption class="figure-caption text-center"><small>(a) The redistributed map for the Somalia in 2018 using the initial method; (b) The redistributed map for the Somalia 2018 estimated census data by using the improved method;</small></figcaption>
+                        </figure>
+                        <ul>
+                            <li>Nightlight is the most important variable to explain the population density in the all features in two methods.</li>
+                            <li>Because a population of high density is in one or two pixels, other pixels in the same level 2 administrative unit don't have such high population density as the mean population density in the whole unit. So, Comparing two maps using initial method and the using improved method (with IDP data) in this project, the high density population is shown more obviously in 2018. This can avoid False alarm situations, which means that high population density in map, but not in reality.</li>
+                            <li>However, when we exclude the IDP data in the unit, the explanatory power of the variable Nightlight decreases, which means the IDP camps is highly related with the night light in Somalia, so that the OOB–score decreases too.</li>
+                            <li>Estimated census data in 2018 will affect the accuracy of the prediction.</li>
+                        </ul>
                     </div>
                 </div>
             </section>
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <p class="mt-4"><i>Last modified August 23, 2020</i></p>
+                        <h2 class="font-weight-bold">Summary and Recommendation</h2>
+                        <h5 class="font-weight-bold mt-4">Summary</h5>
+                        <ul>
+                            <li>Random Forest performs well in disaggregating census data for population mapping.</li>
+                            <li>After subtracting the population of each IDP site from the training unit, the accuracy of the population density model will be enhanced.</li>
+                            <li>The improved method will decrease the explanatory powers of variables.</li>
+                        </ul>
+                        <h5 class="font-weight-bold mt-4">Recommendation</h5>
+                        <ul>
+                            <li>If IDP data is accessible with no outline data, integrating IDP sites in the unit pixel is a good solution to improve the accuracy of prediction model.</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <p class="mt-4"><i>Last modified September 22, 2020</i></p>
                     </div>
                 </div>
             </section>
