@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #backbutton {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            border-radius: 30px;
+            padding: 10px 25px;
+            color: rgba(33,125,187,0.4);
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #backbutton:hover {
+            background-color: rgba(33,125,187,0.4);
+            color: white;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spatio-temporal and Events Based Analysis of COVID-19 in Twitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+
+<body style='padding-top:50px'>
+    <nav class="top-navbar navbar fixed-top navbar-expand navbar-light bg-white">
+        <div class="container">
+            <a id='backbutton' style='text-decoration: none;' href='../index.html#projects'>Back to Projects</a>
+        </div>
+    </nav>
+    <main class="container">
+        <article>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="font-weight-bold mt-4">Spatio-temporal and Events Based Analysis of COVID-19 in Twitter</h1>
+                    <div class="col-7 ml-1">
+                        <div class="row">
+                            <h6>Zhen Liu</h6>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary">Clark Univeristy</small>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary"> zhenliu3@clarku.edu</small>
+                        </div>
+                    </div>
+                    <br>
+                    <figure class="figure">
+                        <img class="figure-img img-fluid col-12" src="assets/images/tweetbanner.jpeg">
+                        <figcaption class="figure-caption text-center"><small>Figure 1. Tweet analysis is a great tool to know the response from the public (credit https://bensonruan.com/)</small></figcaption>
+                    </figure>
+                    <p>Social media platforms are increasingly being used for the analysis of human behavior. Twitter is a great platform for users to share comments and update their status. The COVID-19 pandemic is a prime example of this; there were more than 628 million COVID-19 related tweets at the time of writing the document. </p>
+                    <p>In this project, we will analyze the tweet data in the US continent from September 10th to October 9th spatially and temporally to find out how the public reacts to the COVID-19 pandemic on Twitter.</p>
+
+                </div>
+            </div>
+            
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Twitter Data Mining</h2>
+                        <br>
+                        <p>There are several methods to grab data from Twitter. The first method is to use the python library Tweepy to extract tweets. The second method is to use the software Hydrator to extract tweets from the tweet IDs from the dataset in the COVID-19 research.
+                            In this project, we tried the second method. We intergrated the data in hours into the data in days from Chen, etc.'s dataset. The benefits of Hydrator are: first, it can automatically start and pause the procedure. It can solve the problem of the rate limit
+                            for twitter APIs. Second, the result would be more convincing. Unlike the first method to extract tweets by limited keywords, chen etc incrementally added keywords based on the conversations occurring on Twitter at any time. The keywords they used include not only “COVID”, but also the relevant words, like “stay at home”, “GetMePPE”, “Chinese Virus” (This is wrong, but the word could be seen a lot on Twitter) etc. 
+                        </p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/Hydrator_logo.png">
+                            <figcaption class="figure-caption text-center"><small>Figure 2. Hydrator can extract tweets from Tweet IDs (credit https://news.docnow.io/)</small></figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Spatial and Temporal Analysis</h2>
+                        <p>In this project, we focus on the the tweet number. For different scales, we have different strategies. On the state scale, we normalize the data by the
+                            population in each state. At first, we calculate the global Moran's I. The unit is the state, while the value is the number of tweets in 30 days. The global Moran's I is -0.16 and z-score is -2.05. It indicates there is no significantly pattern on the state scale.  we, then, create a space time cube to see how the tweet density vary spatially and temporally. The time interval of each cube is 1 day.
+                             From Figure 3, we can see east coast ragion has the high density and there are more tweets per day in October than in September.
+                             Next, we perform the Mann-Kendall trend test. Figure 4 shows South Dakota, North Dakota, Connecticut, and Montana have up trends. But only the result of North Dakota is statically significant.
+                        </p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/state_time_space_cube.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 3. Space time cube of tweet number per 100 people in the US continent</small></figcaption>
+                        </figure>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/state_mann_kendall.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 4. Mann-kendall trend of tweet number per 100 people in the US continent</small></figcaption>
+                        </figure>
+                        <p>
+                            As for data with coordinate information, we choose one county which holds the most tweets in 30 days -- Manhattan for analysis. First, we create a kernel point density map first.
+                             Figure 5 shows there are clustered tweets around SOHO and Greenwich village. Then, we perform emerging hot spot analysis (Figure 6), and also find that around SOHO, there exist consecutive hot spots and persistent hot spots.
+                              We sample some tweets and find that most of them are the tweets from restaurant and shops for COVID policy.
+                        </p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/Point_density_manhattan.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 5. Kernel point density map of tweets in Manhattan</small></figcaption>
+                        </figure>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/emerging_hot_spot_manhattan.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 6. Emerging hot spot analysis of tweets in Manhattan</small></figcaption>
+                        </figure>
+                        <p>To make the result more convincing, we tried to normalize the tweet counts by the blockgroup population and perform
+                             Local Moran's I analysis, Hot spot analysis, Optimized hot spot analysis, and Optimized outlier analysis. For hot spot analysis and
+                              optimized outlier analysis, there is no significant result. But From Figure 7 (local moran's I analysis) and Figure 8 (optimized hot spot analysis), we can see Northern Manhattan
+                               don't tweet too much about COVID. And, in the Central park and Time square, the COVID-19 tweet density is high. In the sample tweets, most of them are from tourists. (like "Covid dining in NYC")
+                               Those maybe the reasons that the hot spots occur. (For the central park, we use the average number of tourist per day as population).
+                             
+                        </p>
+
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/LocalMoransI_manhattan.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 7. Local Moran's I of tweet density in Manhattan</small></figcaption>
+                        </figure>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/Optimized_hot_spot_manhattan.jpg">
+                            <figcaption class="figure-caption text-center"><small>Figure 8. Optimized hot spot map of tweet density in Manhattan</small></figcaption>
+                        </figure>
+                        
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Further research</h2>
+                        <br>
+                        <p>From the spatial and temperal analysis, we could understand how the COVID related tweets are distributed.
+                             Next, we want to explore the factors that influence the tweet counts. We take CA as an example. First, we think about the number of COVID cases.
+                              Considering the result is always public in the next day, we set a one-day lag and do the linear regression. t value is 0.334 and z-score is 0.193.
+                               it indicates the relationship between postive case and tweet counts is not strong. 
+                        </p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/tweet_case_relation.png", loop=infinite>
+                            <figcaption class="figure-caption text-center"><small>Figure 9. Tweet counts and positive case counts</small></figcaption>
+                        </figure>
+                        <p>
+                            Next, we try to see whether the big event will influence the tweet counts. So, we make a word cloud based on the tweet content on each day.
+                             In Figure 10, we can see the trending words on each day. The size of word indicates the frequency.
+                        </p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/trending_word_images.gif", loop=infinite>
+                            <figcaption class="figure-caption text-center"><small>Figure 10. word cloud on each day (already exclude the COVID relevant words, like Coronavirus, COVID-19)</small></figcaption>
+                        </figure>
+                        <p>Then, we find that the peak of the tweet number always corespond to some big events. However, we haven't find a metric to measure the prevelance of an event. But, from Figure 11, we still can see the event can be an important factor that influences the tweet counts.</p>
+                        <figure class="figure">
+                            <img class="figure-img img-fluid col-12" src="assets/images/covid_tweet_timeline.png", loop=infinite>
+                            <figcaption class="figure-caption text-center"><small>Figure 11. Timeline of COVID-19 and some report titles</small></figcaption>
+                        </figure>
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Citation</h2>
+                        <ul>
+                            <li>Chen E, Lerman K, Ferrara E Tracking Social Media Discourse About the COVID-19 Pandemic: Development of a Public Coronavirus Twitter Data Set JMIR Public Health Surveillance 2020;6(2):e19273 DOI: 10.2196/19273 PMID: 32427106</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <p class="mt-4"><i>Last modified September 22, 2020</i></p>
+                    </div>
+                </div>
+            </section>
+        </article>
+</body>
+
+</html>
