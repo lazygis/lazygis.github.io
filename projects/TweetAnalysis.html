@@ -85,9 +85,9 @@
                     <div class="col-lg-8 mx-auto">
                         <h2 class="font-weight-bold">Spatial and Temporal Analysis</h2>
                         <p>In this project, we focus on the the tweet number. For different scales, we have different strategies. On the state scale, we normalize the data by the
-                            population in each state. At first, we calculate the global Moran's I. The unit is the state, while the value is the number of tweets in 30 days. The global Moran's I is -0.16 and z-score is -2.05. It indicates there is no significantly pattern on the state scale.  we, then, create a space time cube to see how the tweet density vary spatially and temporally. The time interval of each cube is 1 day.
-                             From Figure 3, we can see east coast ragion has the high density and there are more tweets per day in October than in September.
-                             Next, we perform the Mann-Kendall trend test. Figure 4 shows South Dakota, North Dakota, Connecticut, and Montana have up trends. But only the result of North Dakota is statically significant.
+                            population in each state. At first, we calculate the global Moran's I. The unit is the state, while the value is the tweet counts per 100 people. The global Moran's I is -0.16 and z-score is -2.05. It indicates there is no significant pattern on the state scale.  we, then, create a space time cube to see how the tweet density vary spatially and temporally. The time interval of each cube is 1 day.
+                             From Figure 3, we can see east coast region has the high density and there are more tweets per day in October than in September.
+                             Next, we perform the Mann-Kendall trend test. Figure 4 shows South Dakota, North Dakota, Connecticut, and Montana have up trends. But only the result of North Dakota is statistically significant.
                         </p>
                         <figure class="figure">
                             <img class="figure-img img-fluid col-12" src="assets/images/state_time_space_cube.jpg">
@@ -100,7 +100,7 @@
                         <p>
                             As for data with coordinate information, we choose one county which holds the most tweets in 30 days -- Manhattan for analysis. First, we create a kernel point density map first.
                              Figure 5 shows there are clustered tweets around SOHO and Greenwich village. Then, we perform emerging hot spot analysis (Figure 6), and also find that around SOHO, there exist consecutive hot spots and persistent hot spots.
-                              We sample some tweets and find that most of them are the tweets from restaurant and shops for COVID policy.
+                              We sample some tweets and find that most of them are the tweets from restaurants and shops for COVID policy.
                         </p>
                         <figure class="figure">
                             <img class="figure-img img-fluid col-12" src="assets/images/Point_density_manhattan.jpg">
@@ -113,7 +113,7 @@
                         <p>To make the result more convincing, we tried to normalize the tweet counts by the blockgroup population and perform
                              Local Moran's I analysis, Hot spot analysis, Optimized hot spot analysis, and Optimized outlier analysis. For hot spot analysis and
                               optimized outlier analysis, there is no significant result. But From Figure 7 (local moran's I analysis) and Figure 8 (optimized hot spot analysis), we can see Northern Manhattan
-                               don't tweet too much about COVID. And, in the Central park and Time square, the COVID-19 tweet density is high. In the sample tweets, most of them are from tourists. (like "Covid dining in NYC")
+                               don't tweet too much about COVID-19 and share their coordinates. And, in the Central park and Time square, the COVID-19 tweet density is high. In the sample tweets, most of them are from tourists. (like "Covid dining in NYC")
                                Those maybe the reasons that the hot spots occur. (For the central park, we use the average number of tourist per day as population).
                              
                         </p>
@@ -131,6 +131,7 @@
                     </div>
                 </div>
             </section>
+            
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
@@ -146,14 +147,14 @@
                             <figcaption class="figure-caption text-center"><small>Figure 9. Tweet counts and positive case counts</small></figcaption>
                         </figure>
                         <p>
-                            Next, we try to see whether the big event will influence the tweet counts. So, we make a word cloud based on the tweet content on each day.
+                            Next, we try to see whether the breaking news will influence the tweet counts. So, we make a word cloud based on the tweet content on each day.
                              In Figure 10, we can see the trending words on each day. The size of word indicates the frequency.
                         </p>
                         <figure class="figure">
-                            <img class="figure-img img-fluid col-12" src="assets/images/trending_word_images.gif", loop=infinite>
+                            <img src="assets/images/trending_word_images.gif", loop=infinite>
                             <figcaption class="figure-caption text-center"><small>Figure 10. word cloud on each day (already exclude the COVID relevant words, like Coronavirus, COVID-19)</small></figcaption>
                         </figure>
-                        <p>Then, we find that the peak of the tweet number always corespond to some big events. However, we haven't find a metric to measure the prevelance of an event. But, from Figure 11, we still can see the event can be an important factor that influences the tweet counts.</p>
+                        <p>Then, we find that the peak of the tweet number always correspond to big events. However, we haven't find a metric to measure the prevelance of an event. But, from Figure 11, we still can see the event can be an important factor that influences the tweet counts.</p>
                         <figure class="figure">
                             <img class="figure-img img-fluid col-12" src="assets/images/covid_tweet_timeline.png", loop=infinite>
                             <figcaption class="figure-caption text-center"><small>Figure 11. Timeline of COVID-19 and some report titles</small></figcaption>
@@ -176,7 +177,7 @@
             <section class="mt-5">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <p class="mt-4"><i>Last modified September 22, 2020</i></p>
+                        <p class="mt-4"><i>Last modified November 30, 2020</i></p>
                     </div>
                 </div>
             </section>
