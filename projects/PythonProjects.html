@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #backbutton {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            border-radius: 30px;
+            padding: 10px 25px;
+            color: rgba(33,125,187,0.4);
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #backbutton:hover {
+            background-color: rgba(33,125,187,0.4);
+            color: white;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Useful Executable Programs Developed in Python</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+
+<body style='padding-top:50px'>
+    <nav class="top-navbar navbar fixed-top navbar-expand navbar-light bg-white">
+        <div class="container">
+            <a id='backbutton' style='text-decoration: none;' href='../index.html#projects'>Back to Projects</a>
+        </div>
+    </nav>
+    <main class="container">
+        <article>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="font-weight-bold mt-4">Useful Executable Programs Developed in Python</h1>
+                    <div class="col-7 ml-1">
+                        <div class="row">
+                            <h6>Zhen Liu</h6>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary">Clark Univeristy</small>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary"> zhenliu3@clarku.edu</small>
+                        </div>
+                    </div>
+                    <br>
+                    
+                    <p>As a geographical scientist, I usually process and analyze data by operating professional software. However, I can't work efficiently by just clicking buttons and typing sometimes. For example, the software doesn't have the specific function; there are many repetitive works in the working pipeline. This blog shows programs developed in Python for daily works. Not all projects are open-source because of companies' policy. But, I hope those projects can give you some inspirations.</p>
+                </div>
+            </div>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">1. Quickly Raster Viewer</h2>
+                        <p><b>Problem: </b>Sometimes, I only want to know the general look of a raster file and some basic properties, like size, value ranges, etc. However, I don't want to open a big software, like ArcGIS Map, becuase it takes time to launch it. </p>
+                        <p><b>Features:</b></p>
+                        <ul>
+                            <li>The program is light and simple. Users only need to drag the file to the program.</li>
+                            <li>It shows the minimum, maximum and mean values, row number and column number of the file.</li>
+                        </ul>
+                        <p><b>Technologies: </b>PyQt5, Gdal, Matplotlib, Numpy, PyInstaller</p>
+                        <p><b>Codes: </b> https://github.com/zhenliu26/RasterCheck</p>
+                        <img class="img-fluid my-4" src="assets/images/rastercheck.PNG">
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">2. Sample tool with Google Earth Engine</h2>
+                        <p><b>Problem: </b>When I was doing a project about flood points sampling, we saved data in the Google Earth Engine. However, there is not a great tool on GEE for inspect sampling points. I developed this program to obtain the data from GEE and save the label for each sample point.</p>
+                        <p><b>Features:</b></p>
+                        <ul>
+                            <li>Users inspect the target on Google Earth Engine and save the records locally;</li>
+                            <li>Records are easy to operate;</li>
+                            <li>People can work on the same scene together when they share the record files;</li>
+                            <li>Several composites are available.</li>
+                        </ul>
+                        <p><b>Technologies: </b>PyQt5, pandas, folium, Google Earth Engine APIs, PyInstaller</p>
+                        <p><b>Codes: </b> https://github.com/zhenliu26/sampleGEE</p>
+                        <img class="img-fluid my-4" src="assets/images/SampleGEE.jpeg">
+                    </div>
+                </div>
+            </section>
+        </article>
+</body>
+
+</html>
