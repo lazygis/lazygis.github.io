@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #backbutton {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            border-radius: 30px;
+            padding: 10px 25px;
+            color: rgba(33,125,187,0.4);
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #backbutton:hover {
+            background-color: rgba(33,125,187,0.4);
+            color: white;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mapping Forest Disturbance Across Amazon Basin using Phase Information from Sentinel-1 SLC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+
+<body style='padding-top:50px'>
+    <nav class="top-navbar navbar fixed-top navbar-expand navbar-light bg-white">
+        <div class="container">
+            <a id='backbutton' style='text-decoration: none;' href='../index.html#projects'>Back to Projects</a>
+            <a id='backbutton' style='text-decoration: none;' href='https://drive.google.com/file/d/1XYZM3o5o13vr4O-HsCAATOvdml6bbvDp/view?usp=sharing'>Download</a>
+        </div>
+    </nav>
+    <main class="container">
+        <article>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="font-weight-bold mt-4">Mapping Forest Disturbance Across Amazon Basin using Phase Information from Sentinel-1 SLC</h1>
+                    <div class="col-7 ml-1">
+                        <div class="row">
+                            <h6>Zhen Liu</h6>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary">University of Maryland</small>
+                        </div>
+                        <div class="row">
+                            <small class="text-secondary"> zliu1997@terpmail.umd.edu</small>
+                        </div>
+                    </div>
+                    <img class="img-fluid my-4" src="assets/images/deforestation_grosso_brazil.jpeg">
+                    <figcaption class="figure-caption text-center"><small>Figure 1. Deforestation happened in Mato Grosso, Brazil because of the transformation to farms (credit https://www.earth.com/)</small></figcaption>
+                </div>
+            </div>
+
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Introduction</h2>
+                        <p>Deforestation is a series issue for global climate and biodiversity. First, forests play a key role in the global carbon cycle. Trees absorb carbon dioxide from the atmosphere and store it. Second, forests are also home to a variety of plant and animal species and source of livelihood for many human settlements. However, due to a combination of factors like timber, agriculture, pasture, and fire, deforestation has been intense in Brazil over years. From Global Forest Watch, Mato Grosso experienced most of the deforestation during the last few years.</b></p>
+                        <p>Now, many open-access datasets for forest disturbance use optical satellite images or satellite-based radar data. Both methods can provide a stable and constant data source. One of the significant advantages of radar for deforestation detection is constant data acquisition despite the cloud. Especially for rainforests, there are only a few cloud-free satellite images in one year and often during the dry season. RAdar for Detecting Deforestation (RADD) alerts are one of the products using Radar data to detect forest disturbance. It is built from the world’s first global, freely available radar data from the European Space Agency’s Sentinel-1 satellites. They use VV and VH intensity from GRD (Ground Region Detected) products to train a model and use the model to predict deforestation. However, the backscatters are easily affected by the characteristics of the surface, like moisture, texture, and roughness. The coherence between the two images is a more stable way to detect deforestation. Coherence is described as the phase relationships between two pulses. We can detect landcover change based on the difference between the reactions to the radar signal.</p>
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Using coherence information for deforestation detection</h2>
+                        <p>The coherence values between two images of forests acquired in close succession are low because of the complex structure of trees, while the values between two images of landcover after deforestation, like bare ground, are high. Figure 1 shows how the coherence varies as landcover changes. The horizontal axis refers to the time point and the landcover at that time and the vertical is the coherence between two temporally adjacent images. The coherence between the two images is low when the forest remains. When deforestation happens, the landcover change leads to low coherence. However, we can detect a high value of coherence of the next pair of images because the coherence of two bare-ground images is much higher. When a high value of coherence is detected, scientists can indicate that deforestation happened during the last time period. From the figure, we can also find that the coherence gets back to the low values after the deforestation happened. This can be explained as forest restoration or grass growth in the deforestation region.</p>
+                        <img class="img-fluid my-4" src="assets/images/deforestation_logic.png">
+                        <figcaption class="figure-caption text-center"><small>Figure 2. Coherence between two images is low between two forest images, while the coherence is high between two bare ground images</small></figcaption>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Data acquiring and preprocessing</h2>
+                        <p>The workflow of data acquiring and preprocessing is shown in Figure 2. Data was downloaded from NASA Earth Data Search. There were 16 images in our study time period, which meant there were 15 coherence maps to analyze. Then, ESA's Sentinel Applications Platform (SNAP) was utilized for data preprocessing and subsetting. Users could build pipelines using the Graph Builder function. Pipelines can be imported as XML files into the module. The pipeline included several functions – reading images, applying orbits, back-geocoding, debursting, subsetting, and terrain correcting. To make work more efficient, we customized XML files for each pair of images. It saved a lot of time in operating the user interface. The final outputs were coherence maps.</p>
+                        <figure class="figure">
+                            <img class="img-fluid my-4" src="assets/images/coherence_workflow.png">
+                        </figure>
+                        <figcaption class="figure-caption text-center"><small>Figure 3. The pipeline of acquiring and preprocessing sentinel-1 SLC data</small></figcaption>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Converting coherence maps to binary deforestation maps</h2>
+                        <p>The values in the coherence map can be understood as the similarity between two images. High values mean a high similarity between two images, while low values indicate low similarity. We needed to convert the map with the continuous value of coherence to a binary deforestation map where the presence was deforestation and the absence was no deforestation. At first, we applied a fixed threshold for each coherence image. However, the results were not what we expected. The performance of the threshold varied in different images because of the diverse distribution of values.</p>
+                        <p>We then found an automatic image thresholding method – Otsu’s method. This method determined a threshold to minimize the intra-class intensity variance and maximize the inter-class variance between foreground and background in Figure 4. And, the results were shown in Figure 5. Most patches of deforestation were kept after conversion.</p>
+                        <figure class="figure">
+                            <img class="img-fluid my-4" src="assets/images/Otsu's_Method_Visualization (1).gif">
+                        </figure>
+                        <figcaption class="figure-caption text-center"><small>Figure 4. Otsu’s Method is to maximize the inter-class variance (Credit By Lucas(CA) - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=67144384)</small></figcaption>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Filtering out small-sized patches caused by noise</h2>
+                        <p>After applying the threshold, there were still some tiny patches caused by speckly in the SAR images. To decrease the effect of the noise speckle and focus more on the patches with larger sizes, we applied a the Sieve filter function to filter out the small patches. The Sieve function could be accessed both in Python and QGIS. The function removed raster polygons smaller than the provided threshold size in pixels. We applied the method in Python and took 8 pixels as the threshold based on the previous experience. Figure 5 showed one of the results.</p>
+                        <figure class="figure">
+                            <img class="img-fluid my-4" src="assets/images/sieve_function_result.png">
+                        </figure>
+                        <figcaption class="figure-caption text-center"><small>Figure 5. Maps before and after applying the Sieve method. (a) Deforestation map between 06/11/2022 & 06/23/2022; (b) Deforestation Map after applying the Sieve method</small></figcaption>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Data fusion for deforestation mask</h2>
+                        <p>Before we analyze the deforestation that happened during the season in 2022, we needws to find out which areas had have already experienced deforestation before 2022. We have three data sources for a creating deforestation mask – PRODES (Program to Calculate Deforestation in the Amazon) yearly deforestation map, RADD alerts product, and Sentinel-1 SLC. The table below shows the properties of three products.</p>
+                        <p>We need to preprocess those three products before we combine them as a mask. PRODES data are the official national statistics on deforestation, used by the Brazilian government to establish public policy and track progress toward deforestation reduction goals. Before using the data as a mask, we need to convert the data from vector to raster, resample and reproject the data, and then clip the image to the study region. RADD Forest Disturbance Alert before 2022 can also be a useful data source to generate a mask. To use that data, we need first to decipher the value in the RADD image because the product has its own coding method. Then, we filter out the data in 2022 and keep the data before the season. Also, we did the reproject, resample, and clip functions to the data. For the Sentinel-1 SLC data, we did the same steps as we did for 2022 but the data was in 2021. Then, we combined the three deforestation maps to get the deforestation mask in 2021 as a mask for analysis.</p>
+                        <figure class="figure">
+                            <img class="img-fluid my-4" src="assets/images/results_2021_deforestation_mask.png">
+                        </figure>
+                        <figcaption class="figure-caption text-center"><small>Figure 6. The deforestation map for 2021 is made from three data sources</small></figcaption>
+                    </div>
+                </div>
+            </section>
+            <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="font-weight-bold">Results</h2>
+                        <p>To make the result easy to interpret, I created an RGB color composite. The red channel was the deforestation map using the new method after mask from 05/07/2022 to 11/02/2022 after the Sieve function with threshold 100; the green channel was the deforestation mask before 2022; the blue channel was the RADD alert product from May to Nov in 2022. We should pay attention to red patches and cyan patches in the composite. The red patches are the missed patches in the RADD product. These patches are found in our method but not in the RADD alerts product. The cyan patches are the patches already detected in 2021 by our method but recorded in the RADD alerts in 2022.</p>
+                        <figure class="figure">
+                            <img class="img-fluid my-4" src="assets/images/color_deforestation_image.png">
+                        </figure>
+                        <figcaption class="figure-caption text-center"><small>Figure 7. The color composite of deforestation maps. The red channel is the deforestation map using the new method after mask from 05/07/2022 to 11/02/2022 after the Sieve function with threshold 100; the green channel is the deforestation mask before 2022; the blue channel is the RADD alert product from May to Nov in 2022.</small></figcaption>
+                    </div>
+                </div>
+            </section>
+             <section class="mt-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <p class="mt-4"><i>Last modified January 5, 2023</i></p>
+                    </div>
+                </div>
+            </section>
+        </article>
+        
+</body>
+
+</html>
